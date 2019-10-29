@@ -135,6 +135,7 @@ class GloVEVocab(Vocab):
         #h5f.close()
         #exit(0)
 
+
     def word2id(self, word):
         if word not in self._word2id:
             return self._word2id[self.UNK]
@@ -154,7 +155,7 @@ class GloVEVocab(Vocab):
         return self._size
 
     def embed_dim(self):
-        return self._embedding_d
+        return self._emb_size
 
     def is_oov(self, w):
         return w not in self._word2id

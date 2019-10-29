@@ -72,6 +72,7 @@ class DataSet(object):
                                 w = w.lower()
                                 if w in words:
                                     words[w] += 1
+                                else:
                                     words[w] = 1
         return words
 

@@ -28,8 +28,12 @@ class NarrativeQAGatedMultiBidafWithSelfAttnAndELMoCUDNN(BaseModel):
         batch_size = self.opt.batch_size
         dropout_rate = self.opt.dropout_rate
 
-        self.emb = tf.get_variable("embeddings", shape=[vocab.size(),
-            vocab.emb_size()], initializer=tf.contrib.layers.xavier_initializer())
+        self.emb = tf.get_variable(name="embeddings", shape=[vocab.size(), vocab.embed_dim()],
+                            initializer=tf.constant_initializer(vocab.embeddings()),
+                            trainable=False)
+
+        #self.emb = tf.get_variable("embeddings", shape=[vocab.size(),
+        #    vocab.emb_size()], initializer=tf.contrib.layers.xavier_initializer())
 
         # create placeholders
         self.encoder_inputs = tf.placeholder(shape=[batch_size, None],
