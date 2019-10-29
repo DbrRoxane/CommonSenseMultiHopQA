@@ -105,12 +105,17 @@ def _train(config):
     valid_data = load_processed_dataset(config, 'valid')
 
     print("Data loaded!")
-    vocab = GenModelVocab(vocab_freq, config.embedding_size,
+
+    #vocab = GenModelVocab(vocab_freq, config.embedding_size,
+    #        forced_word_list=relations_vocab,
+    #        cs=train_commonsense_list,
+    #        threshold=config.min_occurence)
+
+    vocab = GloVEVocab(vocab_freq, config.glove_pretrained_file,
             forced_word_list=relations_vocab,
-            cs=train_commonsense_list,
             threshold=config.min_occurence)
 
-    print("Vocab built! Size (%d)" % vocab.size())
+    print("Vocab built using GloVE! Size (%d)" % vocab.size())
 
     model = UsedModel(config, vocab)
 
