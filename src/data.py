@@ -101,6 +101,7 @@ class GloVEVocab(Vocab):
             for line in vocab_f:
 
                 row = line.strip().split(' ')
+                #TODO pretraitement
 
                 word = row[0]
                 embeddings = row[1:]
@@ -110,7 +111,7 @@ class GloVEVocab(Vocab):
                 elif len(embeddings) != dim:
                     continue
 
-                if word in self._word2id:
+                if word in self._word2id.keys():
                     emb[self._word2id[word]] = np.asarray(embeddings,
                             dtype=np.float32)
                     contains += 1
@@ -142,11 +143,11 @@ class GloVEVocab(Vocab):
         return self._word2id[word]
 
     def id2word(self, id):
-        return self._words[id]
+        return self.word_list[id]
 
     def word2embeddings(self, word):
         wid = self.word2id(word)
-        return self.embeddings[wid]
+        return self._embeddings[wid]
 
     def embeddings(self):
         return self._embeddings
