@@ -60,7 +60,7 @@ class GenModelVocab(Vocab):
     def is_oov(self, w):
         return w not in self._word2id
 
-class GloVEVocab(Vocab):
+class PreTrainedVocab(Vocab):
     '''
     very similar to vocab class, but uses glove vectors for initialization
     '''
@@ -70,7 +70,7 @@ class GloVEVocab(Vocab):
     EOS = 'EOS'
     UNK = 'UNK'
 
-    def __init__(self, w_list, glove_file, forced_word_list=[], threshold=None):
+    def __init__(self, w_list, pre_trained_file, forced_word_list=[], threshold=None):
         if threshold is not None:
             filtered_w = {}
             for w in w_list.keys():
@@ -97,7 +97,7 @@ class GloVEVocab(Vocab):
 
         contains = 0
         dim = None
-        with open(glove_file, 'r') as vocab_f:
+        with open(pre_trained_file, 'r') as vocab_f:
             for line in vocab_f:
 
                 row = line.strip().split(' ')
@@ -159,6 +159,7 @@ class GloVEVocab(Vocab):
 
     def is_oov(self, w):
         return w not in self._word2id
+
 
 
 def save_vocab(vocab, loc):

@@ -57,9 +57,9 @@ flags.DEFINE_integer("num_attn_hops", 3, "numbers of hops for attention")
 flags.DEFINE_boolean("continue_training", False,
     "Continue training a trained model?")
 
-flags.DEFINE_string("glove_pretrained_file",
-                    "lm_data/nqa/glove.840B.300d.txt",
-                    "GloVE pretrained_file")
+flags.DEFINE_string("pretrained_word_embedding_file",
+                    "lm_data/nqa/numberbatch-en-19.08.txt",
+                    "Pretrained Word Embedding File")
 
 flags.DEFINE_string("elmo_options_file",
     "lm_data/nqa/elmo_2x4096_512_2048cnn_2xhighway_options.json",

@@ -10,7 +10,7 @@ from pycocoevalcap.rouge.rouge import Rouge
 from summary_handler import SummaryHandler
 from read_data import *
 from data import GenModelVocab, translate, save_vocab, restore_vocab,\
-    translate_spans, GloVEVocab
+    translate_spans, PreTrainedVocab
 import time
 
 from tensorflow.python.client import timeline
@@ -111,11 +111,11 @@ def _train(config):
     #        cs=train_commonsense_list,
     #        threshold=config.min_occurence)
 
-    vocab = GloVEVocab(vocab_freq, config.glove_pretrained_file,
+    vocab = PreTrainedVocab(vocab_freq, config.pretrained_word_embedding_file,
             forced_word_list=relations_vocab,
             threshold=config.min_occurence)
 
-    print("Vocab built using GloVE! Size (%d)" % vocab.size())
+    print("Vocab built using Pre-training (here ConceptNet Numberbatch)! Size (%d)" % vocab.size())
 
     model = UsedModel(config, vocab)
 
