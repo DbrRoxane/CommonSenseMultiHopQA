@@ -142,11 +142,11 @@ class PreTrainedVocab(Vocab):
         return self._word2id[word]
 
     def id2word(self, id):
-        return self._words[id]
+        return self.word_list[id]
 
     def word2embeddings(self, word):
         wid = self.word2id(word)
-        return self.embeddings[wid]
+        return self._embeddings[wid]
 
     def embeddings(self):
         return self._embeddings
