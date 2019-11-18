@@ -70,7 +70,7 @@ class PreTrainedVocab(Vocab):
     EOS = 'EOS'
     UNK = 'UNK'
 
-    def __init__(self, w_list, pre_trained_file, forced_word_list=[], threshold=None):
+    def __init__(self, w_list, pre_trained_file, cs = [], forced_word_list=[], threshold=None):
         if threshold is not None:
             filtered_w = {}
             for w in w_list.keys():
@@ -79,7 +79,13 @@ class PreTrainedVocab(Vocab):
 
             w_list = filtered_w
 
-        w_list = w_list.keys() + forced_word_list 
+        cs_list = {}
+        for c in cs:
+            if (not c in w_list) and (not c in forced_word_list):
+                print "c", c
+                cs_list[c] = c
+
+        w_list = w_list.keys() + cs_list.keys() + forced_word_list
 
         self.word_list = [self.PAD, self.BOS, self.EOS, self.UNK] + w_list
         self._size = len(self.word_list)

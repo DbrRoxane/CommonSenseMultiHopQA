@@ -106,14 +106,15 @@ def _train(config):
 
     print("Data loaded!")
 
-    #vocab = GenModelVocab(vocab_freq, config.embedding_size,
-    #        forced_word_list=relations_vocab,
-    #        cs=train_commonsense_list,
-    #        threshold=config.min_occurence)
-
-    vocab = PreTrainedVocab(vocab_freq, config.pretrained_word_embedding_file,
+    vocab = GenModelVocab(vocab_freq, config.embedding_size,
             forced_word_list=relations_vocab,
+            cs=train_commonsense_list,
             threshold=config.min_occurence)
+
+    #vocab = PreTrainedVocab(vocab_freq, config.pretrained_word_embedding_file,
+    #                        cs = train_commonsense_list,
+    #                        forced_word_list=relations_vocab,
+    #                        threshold=config.min_occurence)
 
     print("Vocab built using Pre-training (here ConceptNet Numberbatch)! Size (%d)" % vocab.size())
 
